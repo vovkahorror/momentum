@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+  <link href="assets/favicon.ico" rel="shortcut icon" />
+  <link rel="stylesheet" href="css/owfont-regular.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>Momentum</title>
+</head>
+
+<body>
+  <div class="preloader"></div>
+  <header class="header">
+    <div class="player">
+      <div class="player-controls">
+        <div class="player-controls-main">
+          <button class="play-prev player-icon"></button>
+          <button class="play player-icon"></button>
+          <button class="play-next player-icon"></button>
+        </div>
+        <div class="player-controls-auxiliary">
+          <div class="current-track"></div>
+          <div class="timeline">
+            <div class="progress"></div>
+          </div>
+          <div class="track-controls">
+            <div class="track-time">
+              <div class="current">0:00</div>
+              <div class="divider">/</div>
+              <div class="length">0:00</div>
+            </div>
+            <div class="volume-container">
+              <div class="volume-slider">
+                <div class="volume-percentage"></div>
+              </div>
+              <div class="volume-button"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="play-list"></ul>
+    </div>
+    <div class="weather">
+      <input type="text" class="city" value="Minsk" />
+      <i class="weather-icon owf"></i>
+      <div class="weather-error"></div>
+      <div class="description-container">
+        <span class="temperature"></span>
+        <span class="weather-description"></span>
+      </div>
+      <div class="wind"></div>
+      <div class="humidity"></div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="slider-icons">
+      <button class="slide-prev slider-icon"></button>
+      <button class="slide-next slider-icon"></button>
+    </div>
+    <div class="time"></div>
+    <div class="date"></div>
+    <div class="greeting-container">
+      <span class="greeting"></span>
+      <input type="text" class="name" />
+    </div>
+    <div class="settings">
+      <div class="settings-inner">
+        <div class="settings-main">
+          <div class="settings-item">
+            <div class="settings-name settings-language">Language</div>
+            <div class="language">
+              <div class="en language-item">English</div>
+              <div class="ru language-item">Russian</div>
+            </div>
+          </div>
+          <div class="settings-item">
+            <div class="settings-name settings-source">Background source</div>
+            <div class="api-image">
+              <div class="api-default api-item">Default</div>
+              <div class="api-unsplash api-item">Unsplash</div>
+              <div class="api-flickr api-item">Flickr</div>
+            </div>
+          </div>
+          <div class="settings-item">
+            <div class="settings-name settings-themes">Background themes</div>
+            <div class="queries">
+              <div class="query-nature queries-item">Nature</div>
+              <div class="query-animals queries-item">Animals</div>
+              <div class="query-space queries-item">Space</div>
+              <div class="query-architecture queries-item">Architecture</div>
+              <div class="query-art queries-item">Art</div>
+              <div class="query-cars queries-item">Cars</div>
+              <div class="query-extreme queries-item">Extreme</div>
+              <div class="query-videogames queries-item">Videogames</div>
+              <div class="query-horror queries-item">Horror</div>
+              <div class="query-abstraction queries-item">Abstraction</div>
+            </div>
+          </div>
+        </div>
+        <div class="scope"></div>
+        <div class="settings-auxiliary">
+          <div class="settings-auxiliary-name">Active sections</div>
+          <div class="settings-sections">
+            <label class="check-item"><input class="checkbox" name="time" type="checkbox" checked><span
+                class="settings-time">Time</span></label>
+            <label class="check-item"><input class="checkbox" name="date" type="checkbox" checked><span
+                class="settings-date">Date</span></label>
+            <label class="check-item"><input class="checkbox" name="greeting" type="checkbox" checked><span
+                class="settings-greeting">Greeting</span></label>
+            <label class="check-item"><input class="checkbox" name="quote" type="checkbox" checked><span
+                class="settings-quotes">Quotes</span></label>
+            <label class="check-item"><input class="checkbox" name="weather" type="checkbox" checked><span
+                class="settings-weather">Weather</span></label>
+            <label class="check-item"><input class="checkbox" name="audio" type="checkbox" checked><span
+                class="settings-audio">Audio</span></label>
+            <label class="check-item"><input class="checkbox" name="todolist" type="checkbox" checked><span
+                class="settings-todo">ToDo list</span></label>
+          </div>
+          <div class="author-links">
+            <a class="author-icon author-github" href="https://github.com/vovkahorror" target="_blank"><img
+                src="assets/svg/github.svg" alt=""></a>
+            <a class="author-icon author-rs" href="https://rs.school/js-stage0/" target="_blank"><img
+                src="assets/svg/rs.svg" alt=""></a>
+          </div>
+          <div class="year">2022</div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="todo-section">
+      <div class="todo-list-wrapper">
+        <div class="todo-list"></div>
+      </div>
+      <input class="todo-input" type="text" placeholder="ToDo">
+    </div>
+    <button class="change-quote"></button>
+    <div class="quotes-block">
+      <div class="quote"></div>
+      <div class="author"></div>
+    </div>
+    <div class="settings-gear"></div>
+  </footer>
+  <script type="module" src="js/script.js"></script>
+  <script src="js/self-score.js"></script>
+</body>
+
+</html>

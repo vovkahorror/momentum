@@ -1,0 +1,945 @@
+@font-face {
+  font-family: "Arial-MT";
+  src: url("../assets/fonts/ArialMonospacedMT-Bold.woff2"); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: "SF Mono Bold";
+  src: url("../assets/fonts/SFMono-Bold.woff2"); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: "SF UI Text Regular";
+  src: url("../assets/fonts/SFUIText-Regular.woff2"); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: "SF UI Text Italic";
+  src: url("../assets/fonts/SFUIText-Italic.woff2"); /* Путь к файлу со шрифтом */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-family: "SF UI Text Regular", "Arial", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 480px;
+  min-height: 100vh;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  transition: background-image 1s ease-in-out;
+}
+
+.preloader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  transform: translate(-50%, -50%);
+  background: url(../assets/images/Loading01.gif) #000000 center no-repeat;
+  transition: 0.3s;
+  z-index: 10;
+}
+
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  height: 30vh;
+  min-height: 220px;
+  padding: 20px;
+}
+
+.player {
+  transition: 0.3s;
+}
+
+.player-icon,
+.slider-icon,
+.change-quote {
+  min-width: 32px;
+  min-height: 32px;
+  background-size: 32px 32px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.player-icon:hover,
+.slider-icon:hover,
+.change-quote:hover,
+.settings-gear:hover {
+  opacity: 1;
+}
+
+.player-icon:active,
+.slider-icon:active,
+.change-quote:active,
+.settings-gear:active {
+  border: 0;
+  outline: 0;
+  transform: scale(1.1);
+}
+
+.play {
+  width: 40px;
+  height: 40px;
+  background-size: 40px 40px;
+  background-image: url("../assets/svg/play.svg");
+}
+
+.pause {
+  background-image: url("../assets/svg/pause.svg");
+}
+
+.play-prev {
+  background-image: url("../assets/svg/play-prev.svg");
+}
+
+.play-next {
+  background-image: url("../assets/svg/play-next.svg");
+}
+
+.player-controls {
+  display: flex;
+  margin-bottom: 28px;
+}
+
+.player-controls-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  width: 120px;
+}
+
+.player-controls-auxiliary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  margin-left: 10px;
+}
+
+.current-track {
+  height: 18px;
+  font-size: 16px;
+}
+
+.timeline {
+  position: relative;
+  margin-top: 8px;
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.progress {
+  background: #ffffff;
+  width: 0%;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.track-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.track-time {
+  display: flex;
+  font-size: 14px;
+}
+
+.divider {
+  margin: 0 5px;
+}
+
+.volume-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.volume-slider {
+  width: 80px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.volume-percentage {
+  height: 100%;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 3px;
+}
+
+.volume-percentage-mute {
+  opacity: 0;
+}
+
+.volume-button {
+  width: 25px;
+  height: 25px;
+  background: url("../assets/svg/volume-high.svg") center/cover no-repeat;
+  cursor: pointer;
+  transition: 0.2s;
+  opacity: 0.8;
+}
+
+.volume-button:hover {
+  opacity: 1;
+}
+
+.volume-button-medium {
+  background: url("../assets/svg/volume-medium.svg") center/cover no-repeat;
+}
+
+.volume-button-low {
+  background: url("../assets/svg/volume-low.svg") center/cover no-repeat;
+}
+
+.volume-button-off {
+  background: url("../assets/svg/volume-off.svg") center/cover no-repeat;
+}
+
+.volume-button-mute {
+  background: url("../assets/svg/volume-mute.svg") center/cover no-repeat;
+}
+
+.play-list {
+  text-align: left;
+}
+
+.play-item {
+  position: relative;
+  padding: 5px;
+  padding-left: 20px;
+  list-style: none;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.play-item:hover {
+  opacity: 1;
+}
+
+.play-item::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23fff' class='bi bi-play-fill' viewBox='0 0 16 16'%3E%3Cpath d='m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z'/%3E%3C/svg%3E%0A");
+  position: absolute;
+  left: 0;
+  top: 7px;
+}
+
+.item-active {
+  color: #00b7ff;
+}
+
+.item-before::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23fff' class='bi bi-pause-fill' viewBox='0 0 16 16'%3E%3Cpath d='M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z'/%3E%3C/svg%3E%0A");
+}
+
+.weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  row-gap: 5px;
+  width: 200px;
+  min-height: 180px;
+  text-align: left;
+  transition: 0.3s;
+}
+
+.weather-error {
+  margin-top: -10px;
+}
+
+.description-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.weather-icon {
+  font-size: 44px;
+}
+
+.city {
+  width: 100%;
+  height: 34px;
+  padding: 5px;
+  font-size: 20px;
+  line-height: 24px;
+  color: #fff;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #fff;
+  background-color: transparent;
+}
+
+.city::placeholder {
+  font-size: 20px;
+  color: #fff;
+  opacity: 0.6;
+}
+
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 40vh;
+  min-height: 260px;
+  padding: 0 20px;
+}
+
+.slider-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -70px;
+  cursor: pointer;
+}
+
+.slide-prev {
+  left: 20px;
+  background-image: url("../assets/svg/slider-prev.svg");
+}
+
+.slide-next {
+  right: 20px;
+  background-image: url("../assets/svg/slider-next.svg");
+}
+
+.time {
+  min-height: 124px;
+  font-family: "SF Mono Bold", "Arial-MT", sans-serif;
+  font-size: 100px;
+  transition: 0.3s;
+}
+
+.date {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  min-height: 28px;
+  font-size: 24px;
+  transition: 0.3s;
+}
+
+.greeting-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 48px;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 40px;
+}
+
+.greeting {
+  padding: 10px;
+  text-align: right;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+
+.name {
+  padding: 10px 0;
+  font-size: 40px;
+  text-align: left;
+  color: #fff;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.name::placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+.buffer {
+  position: fixed;
+  top: -1000%;
+  left: -1000%;
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+.settings {
+  position: fixed;
+  top: 200%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  font-size: 20px;
+  z-index: 3;
+  transition: all 0.3s ease-out;
+}
+
+.settings-active {
+  top: 50%;
+}
+
+.settings-inner {
+  display: flex;
+  gap: 10px;
+}
+
+.settings-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.settings-name {
+  flex: 0;
+  min-width: 110px;
+  text-align: right;
+  opacity: 0.8;
+}
+
+.language,
+.api-image {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.language-item {
+  width: 50%;
+}
+
+.en,
+.api-default {
+  border-radius: 8px 0 0 8px;
+}
+
+.ru,
+.api-flickr {
+  border-radius: 0 8px 8px 0;
+}
+
+.language-item,
+.api-item,
+.queries-item,
+.check-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.language-item:hover,
+.api-item:hover,
+.queries-item:hover,
+.check-item:hover {
+  opacity: 1;
+}
+
+.language-active,
+.api-active,
+.query-active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.api-unsplash {
+  border-radius: 0;
+}
+
+.api-item {
+  flex: 1;
+}
+
+.queries {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  min-width: 240px;
+  flex: 1;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.deactivate {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.queries-item {
+  padding: 0 5px;
+}
+
+.queries-item::before {
+  width: 20px;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.query-nature {
+  border-radius: 8px 8px 0 0;
+}
+
+.query-nature::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --%3E%3Cpath fill='%23fff' stroke='%23fff' d='M512 165.4c0 127.9-70.05 235.3-175.3 270.1c-20.04 7.938-41.83 12.46-64.69 12.46c-64.9 0-125.2-36.51-155.7-94.47c-54.13 49.93-68.71 107-68.96 108.1C44.72 472.6 34.87 480 24.02 480c-1.844 0-3.727-.2187-5.602-.6562c-12.89-3.098-20.84-16.08-17.75-28.96c9.598-39.5 90.47-226.4 335.3-226.4C344.8 224 352 216.8 352 208S344.8 192 336 192C228.6 192 151 226.6 96.29 267.6c.1934-10.82 1.242-21.84 3.535-33.05c13.47-65.81 66.04-119 131.4-134.2c28.33-6.562 55.68-6.013 80.93-.0054c56 13.32 118.2-7.412 149.3-61.24c5.664-9.828 20.02-9.516 24.66 .8282C502.7 76.76 512 121.9 512 165.4z'/%3E%3C/svg%3E%0A");
+}
+
+.query-animals::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3C!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --%3E%3Cpath fill='%23fff' stroke='%23fff' d='M332.7 19.85C334.6 8.395 344.5 0 356.1 0C363.6 0 370.6 3.52 375.1 9.502L392 32H444.1C456.8 32 469.1 37.06 478.1 46.06L496 64H552C565.3 64 576 74.75 576 88V112C576 156.2 540.2 192 496 192H426.7L421.6 222.5L309.6 158.5L332.7 19.85zM448 64C439.2 64 432 71.16 432 80C432 88.84 439.2 96 448 96C456.8 96 464 88.84 464 80C464 71.16 456.8 64 448 64zM416 256.1V480C416 497.7 401.7 512 384 512H352C334.3 512 320 497.7 320 480V364.8C295.1 377.1 268.8 384 240 384C211.2 384 184 377.1 160 364.8V480C160 497.7 145.7 512 128 512H96C78.33 512 64 497.7 64 480V249.8C35.23 238.9 12.64 214.5 4.836 183.3L.9558 167.8C-3.331 150.6 7.094 133.2 24.24 128.1C41.38 124.7 58.76 135.1 63.05 152.2L66.93 167.8C70.49 182 83.29 191.1 97.97 191.1H303.8L416 256.1z'/%3E%3C/svg%3E%0A");
+}
+
+.query-space::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'%3E%3Ctitle%3EPlanet%3C/title%3E%3Cpath fill='%23fff' stroke='%23fff' d='M96.85 286.62a8 8 0 00-12.53 8.25C102.07 373.28 172.3 432 256 432a175.31 175.31 0 0052.41-8 8 8 0 00.79-15 1120 1120 0 01-109.48-55.61 1126.24 1126.24 0 01-102.87-66.77zM492.72 339.51c-4.19-5.58-9.11-11.44-14.7-17.53a15.83 15.83 0 00-26.56 5.13c0 .16-.11.31-.17.47a15.75 15.75 0 003.15 16.06c22.74 25 26.42 38.51 25.48 41.36-2 2.23-17.05 6.89-58.15-3.53q-8.83-2.24-19.32-5.46-6.76-2.08-13.79-4.49a176.76 176.76 0 0019.54-27.25c.17-.29.35-.58.52-.88A175.39 175.39 0 00432 256a178.87 178.87 0 00-1-19c-9.57-88.17-84.4-157-175-157a175.37 175.37 0 00-106.4 35.89 177.4 177.4 0 00-45.83 51.84c-.16.29-.34.58-.51.87a175.48 175.48 0 00-13.83 30.52q-5.59-4.87-10.79-9.67c-5.39-5-10.17-9.63-14.42-14-29.57-30.26-33.09-45.61-32.16-48.45 2-2.23 15.54-5.87 48.62 1.31A15.82 15.82 0 0096.22 123l.36-.44a15.74 15.74 0 00-8.67-25.43A237.38 237.38 0 0064.13 93c-30.72-3.53-50.83 2.52-59.78 18-3.24 5.58-6.35 15.09-2.72 28.6C7 159.66 26.14 184 53.23 209.5c8.63 8.13 18.06 16.37 28.12 24.64 7.32 6 15 12.06 22.9 18.08q7.91 6 16.15 12T137.1 276c25.41 17.61 52.26 34.52 78.59 49.69q14.34 8.26 28.64 16t28.37 14.81c21.9 11 43.35 20.92 63.86 29.43q13.19 5.48 25.81 10.16c11.89 4.42 23.37 8.31 34.31 11.59l1.1.33c25.73 7.66 47.42 11.69 64.48 12H464c21.64 0 36.3-6.38 43.58-19 9.09-15.62 4.08-36.32-14.86-61.5z'/%3E%3C/svg%3E%0A");
+}
+
+.query-architecture::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --%3E%3Cpath fill='%23fff' stroke='%23fff' d='M264 0C277.3 0 288 10.75 288 24V34.65C368.4 48.14 431.9 111.6 445.3 192H448C465.7 192 480 206.3 480 224C480 241.7 465.7 256 448 256H63.1C46.33 256 31.1 241.7 31.1 224C31.1 206.3 46.33 192 63.1 192H66.65C80.14 111.6 143.6 48.14 223.1 34.65V24C223.1 10.75 234.7 0 247.1 0L264 0zM63.1 288H127.1V416H167.1V288H231.1V416H280V288H344V416H384V288H448V420.3C448.6 420.6 449.2 420.1 449.8 421.4L497.8 453.4C509.5 461.2 514.7 475.8 510.6 489.3C506.5 502.8 494.1 512 480 512H31.1C17.9 512 5.458 502.8 1.372 489.3C-2.715 475.8 2.515 461.2 14.25 453.4L62.25 421.4C62.82 420.1 63.41 420.6 63.1 420.3V288z'/%3E%3C/svg%3E");
+}
+
+.query-art::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --%3E%3Cpath fill='%23fff' stroke='%23fff' d='M512 255.1C512 256.9 511.1 257.8 511.1 258.7C511.6 295.2 478.4 319.1 441.9 319.1H344C317.5 319.1 296 341.5 296 368C296 371.4 296.4 374.7 297 377.9C299.2 388.1 303.5 397.1 307.9 407.8C313.9 421.6 320 435.3 320 449.8C320 481.7 298.4 510.5 266.6 511.8C263.1 511.9 259.5 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256V255.1zM96 255.1C78.33 255.1 64 270.3 64 287.1C64 305.7 78.33 319.1 96 319.1C113.7 319.1 128 305.7 128 287.1C128 270.3 113.7 255.1 96 255.1zM128 191.1C145.7 191.1 160 177.7 160 159.1C160 142.3 145.7 127.1 128 127.1C110.3 127.1 96 142.3 96 159.1C96 177.7 110.3 191.1 128 191.1zM256 63.1C238.3 63.1 224 78.33 224 95.1C224 113.7 238.3 127.1 256 127.1C273.7 127.1 288 113.7 288 95.1C288 78.33 273.7 63.1 256 63.1zM384 191.1C401.7 191.1 416 177.7 416 159.1C416 142.3 401.7 127.1 384 127.1C366.3 127.1 352 142.3 352 159.1C352 177.7 366.3 191.1 384 191.1z'/%3E%3C/svg%3E%0A");
+}
+
+.query-cars::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' class='bi bi-car-front-fill' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M2.52 3.515A2.5 2.5 0 0 1 4.82 2h6.362c1 0 1.904.596 2.298 1.515l.792 1.848c.075.175.21.319.38.404.5.25.855.715.965 1.262l.335 1.679c.033.161.049.325.049.49v.413c0 .814-.39 1.543-1 1.997V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.338c-1.292.048-2.745.088-4 .088s-2.708-.04-4-.088V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.892c-.61-.454-1-1.183-1-1.997v-.413a2.5 2.5 0 0 1 .049-.49l.335-1.68c.11-.546.465-1.012.964-1.261a.807.807 0 0 0 .381-.404l.792-1.848ZM3 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM6 8a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2H6ZM2.906 5.189l.956-1.913A.5.5 0 0 1 4.309 3h7.382a.5.5 0 0 1 .447.276l.956 1.913a.51.51 0 0 1-.497.731c-.91-.073-3.35-.17-4.597-.17-1.247 0-3.688.097-4.597.17a.51.51 0 0 1-.497-.731Z'/%3E%3C/svg%3E");
+}
+
+.query-extreme::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --%3E%3Cpath fill='%23fff' stroke='%23fff' d='M460.7 249.6c5.877 4.25 12.47 6.393 19.22 6.393c10.76 0 32.05-8.404 32.05-31.97c0-9.74-4.422-19.36-12.8-25.65l-111.5-83.48c-13.75-10.25-29.04-18.42-45.42-23.79l-63.66-21.23l-26.12-52.12c-5.589-11.17-16.9-17.64-28.63-17.64c-17.8 0-31.99 14.47-31.99 32.01c0 4.803 1.086 9.674 3.374 14.25l29.12 58.12c5.75 11.38 15.55 19.85 27.67 23.98l16.45 5.522L227.3 154.6C205.5 165.5 191.9 187.4 191.9 211.8L191.9 264.9L117.8 289.6C104.4 294.1 95.95 306.5 95.95 319.9c0 12.05 6.004 19.05 10.33 23.09l-38.68-14.14C41.23 319.4 49.11 295 23.97 295c-18.67 0-23.97 17.16-23.97 24.09c0 8.553 13.68 41.32 51.13 54.88l364.1 132.8C425.7 510.2 435.7 512 445.7 512c12.5 0 24.97-2.732 36.47-8.232c8.723-3.997 13.85-12.71 13.85-21.77c0-18.67-17.15-23.96-24.06-23.96c-3.375 0-6.73 .7505-9.998 2.248c-5.111 2.486-10.64 3.702-16.21 3.702c-4.511 0-9.049-.7978-13.41-2.364l-90.68-33.12c8.625-4.125 15.53-11.76 17.78-21.89l21.88-101.1c.7086-3.335 1.05-6.668 1.05-10c0-14.91-6.906-29.31-19.17-38.4l-52.01-39l66.01-30.5L460.7 249.6zM316.3 301.3l-19.66 92c-.4205 1.997-.5923 3.976-.5923 5.911c0 4.968 1.264 9.691 3.333 14.01l-169.5-61.49c2.625-.25 5.492-.4448 8.117-1.32l85-28.38c19.63-6.5 32.77-24.73 32.77-45.48l0-20.53L316.3 301.3zM431.9 95.99c26.5 0 48-21.5 48-47.1S458.4 0 431.9 0s-48 21.5-48 47.1S405.4 95.99 431.9 95.99z'/%3E%3C/svg%3E%0A");
+}
+
+.query-videogames::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' class='bi bi-joystick' viewBox='0 0 16 16'%3E%3Cpath d='M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2z'/%3E%3Cpath d='M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23z'/%3E%3C/svg%3E");
+}
+
+.query-horror::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3C!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --%3E%3Cpath fill='%23fff' d='M563.3 401.6c2.608 8.443-2.149 17.4-10.62 19.1l-15.35 4.709c-8.48 2.6-17.47-2.139-20.08-10.59L493.2 338l-79.79-31.8l53.47 62.15c5.08 5.904 6.972 13.89 5.08 21.44l-28.23 110.1c-2.151 8.57-10.87 13.78-19.47 11.64l-15.58-3.873c-8.609-2.141-13.84-10.83-11.69-19.4l25.2-98.02l-38.51-44.77c.1529 2.205 .6627 4.307 .6627 6.549c0 53.02-43.15 96-96.37 96S191.6 405 191.6 352c0-2.242 .5117-4.34 .6627-6.543l-38.51 44.76l25.2 98.02c2.151 8.574-3.084 17.26-11.69 19.4l-15.58 3.873c-8.603 2.141-17.32-3.072-19.47-11.64l-28.23-110.1c-1.894-7.543 0-15.53 5.08-21.44l53.47-62.15l-79.79 31.8l-24.01 77.74c-2.608 8.447-11.6 13.19-20.08 10.59l-15.35-4.709c-8.478-2.6-13.23-11.55-10.63-19.1l27.4-88.69c2.143-6.939 7.323-12.54 14.09-15.24L158.9 256l-104.7-41.73C47.43 211.6 42.26 205.1 40.11 199.1L12.72 110.4c-2.608-8.443 2.149-17.4 10.62-19.1l15.35-4.709c8.48-2.6 17.47 2.139 20.08 10.59l24.01 77.74l79.79 31.8L109.1 143.6C104 137.7 102.1 129.7 104 122.2l28.23-110.1c2.151-8.57 10.87-13.78 19.47-11.64l15.58 3.873C175.9 6.494 181.1 15.18 178.1 23.76L153.8 121.8L207.7 184.4l.1542-24.44C206.1 123.4 228.9 91.77 261.4 80.43c5.141-1.793 10.5 2.215 10.5 7.641V112h32.12V88.09c0-5.443 5.394-9.443 10.55-7.641C345.9 91.39 368.3 121 368.3 155.9c0 1.393-.1786 2.689-.2492 4.064L368.3 184.4l53.91-62.66l-25.2-98.02c-2.151-8.574 3.084-17.26 11.69-19.4l15.58-3.873c8.603-2.141 17.32 3.072 19.47 11.64l28.23 110.1c1.894 7.543 0 15.53-5.08 21.44l-53.47 62.15l79.79-31.8l24.01-77.74c2.608-8.447 11.6-13.19 20.08-10.59l15.35 4.709c8.478 2.6 13.23 11.55 10.63 19.1l-27.4 88.69c-2.143 6.939-7.323 12.54-14.09 15.24L417.1 256l104.7 41.73c6.754 2.691 11.92 8.283 14.07 15.21L563.3 401.6z'/%3E%3C/svg%3E");
+}
+
+.query-abstraction {
+  border-radius: 0 0 8px 8px;
+}
+
+.query-abstraction::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' class='bi bi-symmetry-vertical' viewBox='0 0 16 16'%3E%3Cpath d='M7 2.5a.5.5 0 0 0-.939-.24l-6 11A.5.5 0 0 0 .5 14h6a.5.5 0 0 0 .5-.5v-11zm2.376-.484a.5.5 0 0 1 .563.245l6 11A.5.5 0 0 1 15.5 14h-6a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .376-.484zM10 4.46V13h4.658L10 4.46z'/%3E%3C/svg%3E");
+}
+
+.scope {
+  flex-shrink: 0;
+  background-color: #ffffff;
+  width: 3px;
+  border-radius: 1.5px;
+  opacity: 0.8;
+}
+
+.settings-auxiliary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.settings-auxiliary-name {
+  opacity: 0.8;
+}
+
+.settings-sections {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.check-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox {
+  display: none;
+}
+
+.checkbox ~ span::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' fill='%23fff' class='bi bi-toggle-on' viewBox='0 0 16 16'%3E%3Cpath d='M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10H5zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8z'/%3E%3C/svg%3E");
+  margin-right: 8px;
+  vertical-align: top;
+}
+
+.checkbox-deactive ~ span::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' fill='%23fff' class='bi bi-toggle-off' viewBox='0 0 16 16'%3E%3Cpath d='M11 4a4 4 0 0 1 0 8H8a4.992 4.992 0 0 0 2-4 4.992 4.992 0 0 0-2-4h3zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5z'/%3E%3C/svg%3E");
+  margin-right: 8px;
+  vertical-align: top;
+}
+
+.author-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.author-icon,
+.year {
+  opacity: 0.8;
+  font-size: 14px;
+  transition: transform 0.3s;
+}
+
+.author-icon:hover {
+  opacity: 1;
+}
+
+.author-icon:active {
+  transform: scale(1.1);
+}
+
+.author-github {
+  flex: 0 1 auto;
+  width: 26%;
+}
+
+.author-rs {
+  flex: 1;
+}
+
+.footer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  min-height: 160px;
+  padding: 20px;
+}
+
+.settings-gear {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background-image: url("../assets/svg/gear-fill.svg");
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.todo-section {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 200px;
+  transition: 0.3s;
+}
+
+.todo-list-wrapper {
+  max-height: 285px;
+  overflow: scroll;
+}
+
+.todo-list-wrapper::-webkit-scrollbar {
+  width: 0;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.todo-done,
+.todo-return,
+.todo-del {
+  flex-shrink: 0;
+  width: 20px;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.todo-done:hover,
+.todo-return:hover,
+.todo-del:hover {
+  opacity: 1;
+}
+
+.todo-done:active,
+.todo-return:active,
+.todo-del:active {
+  transform: scale(1.1);
+}
+
+.todo-done {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px'%0AviewBox='0 0 72 72'%0Astyle=' fill:%23fff;'%3E%3Cpath d='M57.658,12.643c1.854,1.201,2.384,3.678,1.183,5.532l-25.915,40c-0.682,1.051-1.815,1.723-3.064,1.814	C29.764,59.997,29.665,60,29.568,60c-1.146,0-2.241-0.491-3.003-1.358L13.514,43.807c-1.459-1.659-1.298-4.186,0.36-5.646	c1.662-1.46,4.188-1.296,5.646,0.361l9.563,10.87l23.043-35.567C53.329,11.971,55.806,11.442,57.658,12.643z'%3E%3C/path%3E%3C/svg%3E")
+    center no-repeat;
+}
+
+.todo-return {
+  background: url("data:image/svg+xml,%3Csvg version='1.0' xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 64.000000 64.000000' preserveAspectRatio='xMidYMid meet'%3E%3Cg transform='translate(0.000000,64.000000) scale(0.100000,-0.100000)' fill='%23fff' stroke='none'%3E%3Cpath d='M156 484 c-9 -8 -16 -20 -16 -26 0 -5 28 -39 62 -74 l61 -64 -61 -64 c-34 -35 -62 -69 -62 -74 0 -14 28 -42 42 -42 5 0 39 28 74 62 l64 61 64 -61 c35 -34 69 -62 74 -62 14 0 42 28 42 42 0 5 -28 39 -62 74 l-61 64 61 64 c34 35 62 69 62 74 0 14 -28 42 -42 42 -5 0 -39 -28 -74 -62 l-64 -61 -64 61 c-35 34 -69 62 -74 62 -6 0 -18 -7 -26 -16z'/%3E%3C/g%3E%3C/svg%3E%0A")
+    center no-repeat;
+}
+
+.todo-text {
+  flex: 1;
+  text-align: left;
+  word-break: break-all;
+  transition: 0.3s;
+}
+
+.todo-text-deactivate {
+  pointer-events: none;
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.todo-del {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' class='bi bi-trash3-fill' viewBox='0 0 16 16'%3E%3Cpath d='M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z'/%3E%3C/svg%3E")
+    center no-repeat;
+}
+
+.todo-input {
+  width: 100%;
+  height: 30px;
+  resize: none;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #fff;
+}
+
+.todo-input::placeholder {
+  text-align: center;
+  font-size: 20px;
+  color: #ffffff;
+  opacity: 0.8;
+}
+
+.change-quote {
+  margin-bottom: 20px;
+  background-image: url("../assets/svg/reload.svg");
+}
+
+.quotes-block {
+  transition: 0.3s;
+}
+
+.quotes-block-transparent {
+  opacity: 0;
+}
+
+.quote {
+  font-family: "SF UI Text Italic", "Arial", sans-serif;
+  margin: 0 auto;
+  padding: 0 210px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.author {
+  margin: 0 auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.section-deactive {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    gap: 30px;
+    background-position: 0;
+  }
+
+  .player-controls {
+    flex-direction: column-reverse;
+    margin-bottom: 10px;
+  }
+
+  .player-controls-main {
+    margin: 0 auto;
+  }
+
+  .player-controls-auxiliary {
+    width: 200px;
+    margin-left: 0;
+  }
+
+  .main {
+    justify-content: center;
+  }
+
+  .time {
+    min-height: 80px;
+    font-size: 72px;
+  }
+
+  .greeting-container {
+    min-height: 40px;
+    font-size: 32px;
+  }
+
+  .greeting {
+    padding: 5px;
+  }
+
+  .name {
+    font-size: 32px;
+    padding: 5px;
+  }
+
+  .slider-icon {
+    position: fixed;
+    margin-top: 0;
+    z-index: 2;
+  }
+
+  .settings {
+    max-width: 80%;
+    max-height: 80%;
+    overflow: scroll;
+  }
+
+  .settings::-webkit-scrollbar {
+    width: 0;
+  }
+
+  .settings-inner {
+    flex-direction: column;
+  }
+
+  .settings-inner,
+  .settings-main {
+    gap: 20px;
+  }
+
+  .settings-item {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .settings-name {
+    flex: 1;
+    text-align: center;
+  }
+
+  .language,
+  .api-image,
+  .queries,
+  .settings-sections {
+    width: 100%;
+  }
+
+  .scope {
+    display: none;
+  }
+
+  .settings-auxiliary {
+    align-items: center;
+  }
+
+  .author-links {
+    width: 60%;
+  }
+
+  .footer {
+    padding-top: 0;
+  }
+
+  .todo-section {
+    position: relative;
+    bottom: 0;
+    right: 0;
+    width: 320px;
+    margin-bottom: 30px;
+  }
+
+  .todo-list-wrapper {
+    max-height: none;
+    height: 260px;
+  }
+
+  .quote {
+    padding: 0;
+  }
+
+  .settings-gear {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    align-self: flex-start;
+  }
+}
