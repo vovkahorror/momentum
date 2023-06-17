@@ -67,7 +67,7 @@ const preloader = document.querySelector(".preloader");
 
 function showTime() {
   const date = new Date();
-  timeSection.textContent = date.toLocaleTimeString();
+  timeSection.textContent = date.toLocaleTimeString('uk-UA');
   setTimeout(showTime, 1000);
   showDate();
 }
@@ -79,8 +79,7 @@ function showDate() {
     month: "long",
     day: "numeric",
   };
-  const currentDate = date.toLocaleDateString(`${state.language}`, options);
-  dateSection.textContent = currentDate;
+  dateSection.textContent = date.toLocaleDateString(`${state.language}`, options);
 }
 
 const timeSection = document.querySelector(".time");
@@ -269,8 +268,7 @@ city.addEventListener("change", getWeather);
 function getRandomQuote(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  const randomIn = Math.floor(Math.random() * (max - min + 1)) + min;
-  return randomIn;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 async function getQuotes() {
@@ -365,8 +363,7 @@ function currentTrack() {
 
 function changeTimeline(event) {
   const timelineWidth = window.getComputedStyle(timeline).width;
-  const timeToSeek = (event.offsetX / parseInt(timelineWidth)) * audio.duration;
-  audio.currentTime = timeToSeek;
+  audio.currentTime = (event.offsetX / parseInt(timelineWidth)) * audio.duration;
   if (!isPlay) {
     isPlay = true;
     playAudio();
@@ -500,10 +497,10 @@ function activateLanguage() {
 function translateDefault() {
   if (state.language === "en") {
     name.placeholder = "[Enter name]";
-    if (city.value === "Минск") city.value = "Minsk";
+    if (city.value === "Киев") city.value = "Kyiv";
   } else if (state.language === "ru") {
     name.placeholder = "[Введите имя]";
-    if (city.value === "Minsk") city.value = "Минск";
+    if (city.value === "Kyiv") city.value = "Киев";
   }
   html.lang = state.language;
 }
@@ -528,8 +525,7 @@ window.addEventListener("load", activateLanguage);
 function getRandomImage(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  const randomImage = Math.floor(Math.random() * (max - min + 1)) + min;
-  return randomImage;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 async function getImageFromUnsplash() {
